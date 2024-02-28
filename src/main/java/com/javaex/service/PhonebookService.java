@@ -19,6 +19,17 @@ public class PhonebookService {
 	//메소드 gs
 	//메소드 일반
 	
+	//리스트
+	public List<PersonVo> exeList() {
+		System.out.println("PhonebookService.exeList()");
+				
+		//PhonebookDao phonebookDao = new PhonebookDao();
+		List<PersonVo> personList= phonebookDao.personSelect();
+				
+		return personList;
+				
+	}
+	
 	//등록
 	public int exeWrite(PersonVo personVo) {
 		System.out.println("PhonebookService.exeWrite()");
@@ -31,16 +42,26 @@ public class PhonebookService {
 		
 		
 	}
-	//리스트
-	public List<PersonVo> exeList() {
-		System.out.println("PhonebookService.exeList()");
-		
-		//PhonebookDao phonebookDao = new PhonebookDao();
-		List<PersonVo> personList= phonebookDao.personSelect();
-		
-		return personList;
-		
+	//수정폼
+	public int exeModify(PersonVo personVo) {
+		System.out.println("PhonebookService.exeModify()");
+
+		// PhonebookDao phonebookDao = new PhonebookDao();
+		int count = phonebookDao.personUpdate(personVo);
+
+		return count;
 	}
+	
+	//수정
+	public PersonVo exeModifyForm(int no) {
+		System.out.println("PhonebookService.exeModifyForm()");
+
+		//PhonebookDao phonebookDao = new PhonebookDao();
+		PersonVo personVo = phonebookDao.personSelectOne(no);
+
+		return personVo;
+	}
+
 	//삭제
 	public int exeDelete(int no) {
 		System.out.println("PhonebookService.exeDelete()");
@@ -50,26 +71,8 @@ public class PhonebookService {
 		
 		return count;
 	}
-	//수정폼
-	public int exeModify(PersonVo personVo) {
-		System.out.println("PhonebookService.exeModify()");
-			
-		//PhonebookDao phonebookDao = new PhonebookDao();
-		int count = phonebookDao.personUpdate(personVo);
-
-		return count;
-	 	}
-
 	
 	
-	//수정
-	public PersonVo exeModifyForm(int no) {
-		System.out.println("PhonebookService.exeModifyForm()");
-		
-		//PhonebookDao phonebookDao = new PhonebookDao();
-		PersonVo personVo = phonebookDao.personSelectOne(no);
-
-		return personVo;
- 	}
+	
 	
 }

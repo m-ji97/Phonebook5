@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="phonebook">
+   
+   
+   <!-- 전체리스트 가져오기 -->
+   <select id="select" resultType="com.javaex.vo.PersonVo">
+   		select person_id personId,
+   				name,
+   				hp,
+   				company
+   		from person
+   </select>
+   <!-- 1명 저장 -->
+   <insert id="insert" parameterType="com.javaex.vo.PersonVo">
+	  insert into person
+	  values(null, #{name}, #{hp}, #{company})
+   </insert>
+   <!-- 1명 데이터 가져오기 -->
+   <select id="SelectOne" parameterType="int" resultType="com.javaex.vo.PersonVo">
+		select person_id personId,
+				name,
+		        hp,
+		        company
+		from person
+		where person_id = #{no}
+	</select>
+   <!-- 데이터 수정 -->
+   <update id="update" parameterType="com.javaex.vo.PersonVo"> <!-- 주소확인 ctrl+마우스올리기 -->
+		update person
+		set name = #{name},
+		hp = #{hp},
+		company = #{company}
+		where person_id = #{personId}
+	</update>
+	<delete id="delete" parameterType="com.javaex.vo.PersonVo">
+		delete from person
+		where person_id= #{personId}
+	</delete>
+
+</mapper>
