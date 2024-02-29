@@ -3,10 +3,10 @@
 
 <configuration>
    <typeAliases>
+   		<typeAlias alias="PersonVo" type="com.javaex.vo.PersonVo"/>
    </typeAliases>
 
    <mappers>
-      <mapper resource="mybatis/mappers/phonebook.xml" />
-      <!-- <mapper resource="mybatis/mappers/guestbook.xml" /> -->
+      <mapper resource="mybatis/mappers/user.xml" />
    </mappers>
 </configuration>

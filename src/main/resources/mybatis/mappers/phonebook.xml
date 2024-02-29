@@ -1,42 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="phonebook">
-   
-   
+	<!-- PersonVo 매핑 -->
+	<mapper namespace="phonebook">
+		<resultMap id="resultPersonVo" type="com.javaex.vo.PersonVo">
+			<result column="person_id" property="personId"></result>
+			<result column="name" property="name"></result>
+			<result column="hp" property="hp"></result>
+			<result column="company" property="company"></result>
+		</resultMap>
+
    <!-- 전체리스트 가져오기 -->
-   <select id="select" resultType="com.javaex.vo.PersonVo">
-   		select person_id personId,
-   				name,
-   				hp,
-   				company
-   		from person
+   <select id="select" resultType="PersonVo">
+   		<![CDATA[
+	   		select person_id personId,
+	   				name,
+	   				hp,
+	   				company
+	   		from person
+   		]]>
    </select>
+
    <!-- 1명 저장 -->
-   <insert id="insert" parameterType="com.javaex.vo.PersonVo">
-	  insert into person
-	  values(null, #{name}, #{hp}, #{company})
+   <insert id="insert" parameterType="PersonVo">
+	  <![CDATA[
+		  insert into person
+		  values(null, #{name}, #{hp}, #{company})
+	  ]]>
+	</insert>
+   
+   <!-- 1명 저장 ,map사용 -->
+   <insert id="insert2" parameterType="Map">
+   	 <![CDATA[
+	   	  insert into person
+	   	  values(null,#{name},#{hp},#{company})
+   	  ]]>
    </insert>
+   
    <!-- 1명 데이터 가져오기 -->
-   <select id="SelectOne" parameterType="int" resultType="com.javaex.vo.PersonVo">
-		select person_id personId,
+   <select id="SelectOne" parameterType="int" resultType="PersonVo">
+		<![CDATA[
+		select person_id as personId,
 				name,
 		        hp,
 		        company
 		from person
 		where person_id = #{no}
+		]]>
+	</select>
+	
+	<!-- 1명 데이터 가져오기2 -->
+	<select id="selectone2" parameterType="int" resultType="Map">
+		<![CDATA[
+			select person_id as personId,
+					name,
+			        hp,
+			        company
+			from person
+			where person_id = #{no}
+			]]>
 	</select>
    <!-- 데이터 수정 -->
-   <update id="update" parameterType="com.javaex.vo.PersonVo"> <!-- 주소확인 ctrl+마우스올리기 -->
+   <update id="update" parameterType="PersonVo"> <!-- 주소확인 ctrl+마우스올리기 -->
+		<![CDATA[
 		update person
 		set name = #{name},
 		hp = #{hp},
 		company = #{company}
 		where person_id = #{personId}
+		]]>
 	</update>
-	<delete id="delete" parameterType="com.javaex.vo.PersonVo">
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="PersonVo">
+		<![CDATA[
 		delete from person
 		where person_id= #{personId}
+		]]>
 	</delete>
+	<!-- 수정 -->
 
 </mapper>
